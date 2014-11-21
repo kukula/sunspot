@@ -142,29 +142,29 @@ module Sunspot
     # 
     # See Sunspot.remove!
     #
-    def remove!(*objects, &block)
-      remove(*objects, &block)
+    def remove!(*objects)
+      remove(*objects)
       commit
     end
 
     # 
     # See Sunspot.remove_by_id
     #
-    def remove_by_id(clazz, *ids)
+    def remove_by_id(clazz, id)
       class_name =
         if clazz.is_a?(Class)
           clazz.name
         else
           clazz.to_s
         end
-      indexer.remove_by_id(class_name, ids)
+      indexer.remove_by_id(class_name, id)
     end
 
     # 
     # See Sunspot.remove_by_id!
     #
-    def remove_by_id!(clazz, *ids)
-      remove_by_id(clazz, ids)
+    def remove_by_id!(clazz, id)
+      remove_by_id(clazz, id)
       commit
     end
 

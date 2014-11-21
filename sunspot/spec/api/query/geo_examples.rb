@@ -41,8 +41,12 @@ shared_examples_for 'geohash query' do
       fulltext 'pizza', :fields => :title
       with(:coordinates).near(40.7, -73.5)
     end
-    expected = %Q((_query_:"{!edismax qf='title_text'}pizza" AND (#{build_geo_query})))
-    connection.should have_last_search_including(:q, expected)
+    expected = 
+      "{!dismax fl='* score' qf='title_text'}pizza (#{build_geo_query})"
+    connection.should have_last_search_including(
+      :q,
+      %Q(_query_:"{!dismax qf='title_text'}pizza" (#{build_geo_query}))
+    )
   end
 
   private
@@ -53,7 +57,7 @@ shared_examples_for 'geohash query' do
     boost = options[:boost] || 1.0
     hash = 'dr5xx3nytvgs'
     (precision..12).map do |i|
-      phrase =
+      phrase = 
         if i == 12 then hash
         else "#{hash[0, i]}*"
         end

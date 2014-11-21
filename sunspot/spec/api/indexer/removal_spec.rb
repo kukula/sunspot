@@ -11,20 +11,10 @@ describe 'document removal', :type => :indexer do
     connection.should have_delete('Post 1')
   end
 
-  it 'removes an object by type and ids' do
-    session.remove_by_id(Post, 1, 2)
-    connection.should have_delete('Post 1', 'Post 2')
-  end
-
-  it 'removes an object by type and ids array' do
-    session.remove_by_id(Post, [1, 2])
-    connection.should have_delete('Post 1', 'Post 2')
-  end
-
-  it 'removes an object by type and ids and immediately commits' do
-    connection.should_receive(:delete_by_id).with(['Post 1', 'Post 2', 'Post 3']).ordered
+  it 'removes an object by type and id and immediately commits' do
+    connection.should_receive(:delete_by_id).with(['Post 1']).ordered
     connection.should_receive(:commit).ordered
-    session.remove_by_id!(Post, 1, 2, 3)
+    session.remove_by_id!(Post, 1)
   end
 
   it 'removes an object from the index and immediately commits' do

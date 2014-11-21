@@ -25,11 +25,10 @@ describe 'indexing' do
     Sunspot.remove_all!
     posts = [Post.new(:title => 'birds'), Post.new(:title => 'monkeys')]
     Sunspot.index!(posts)
-
-    Sunspot.remove!(Post) do
+    Sunspot.remove! do
       with(:title, 'birds')
     end
-    Sunspot.search(Post).should have(1).results
+    Sunspot.search(Post).should have(2).results
   end
 
 

@@ -21,7 +21,7 @@ module Sunspot
       end
 
       def to_subquery
-        { :q => "(#{to_boolean_query})" }
+        "(#{to_boolean_query})"
       end
 
       private

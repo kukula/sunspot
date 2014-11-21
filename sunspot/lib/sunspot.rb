@@ -417,8 +417,8 @@ module Sunspot
     #
     # objects...<Object>:: Objects to remove from the index
     #
-    def remove!(*objects, &block)
-      session.remove!(*objects, &block)
+    def remove!(*objects)
+      session.remove!(*objects)
     end
 
     # 
@@ -433,16 +433,16 @@ module Sunspot
     #   Primary key of the object. This should be the same id that would be
     #   returned by the class's instance adapter.
     #
-    def remove_by_id(clazz, *ids)
-      session.remove_by_id(clazz, ids)
+    def remove_by_id(clazz, id)
+      session.remove_by_id(clazz, id)
     end
 
     # 
     # Remove an object by class name and primary key, and immediately commit.
     # See #remove_by_id and #commit
     #
-    def remove_by_id!(clazz, *ids)
-      session.remove_by_id!(clazz, ids)
+    def remove_by_id!(clazz, id)
+      session.remove_by_id!(clazz, id)
     end
 
     # Remove all objects of the given classes from the index. There isn't much
