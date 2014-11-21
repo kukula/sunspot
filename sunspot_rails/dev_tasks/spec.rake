@@ -44,7 +44,8 @@ namespace :spec do
 
   task :initialize_database do
     if ENV['DB'] == 'postgres'
-      sh "bundle exec rake db:test:prepare"
+      sh "psql -c 'DROP DATABASE IF EXISTS sunspot_test;' -d template1"
+      sh "psql -c 'create database sunspot_test;' -d template1"
     end
   end
 
