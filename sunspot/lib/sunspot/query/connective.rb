@@ -101,7 +101,7 @@ module Sunspot
                 "(#{component_phrases.join(" #{connector} ")})"
               end
             if negated?
-              "-#{phrase}"
+              negate_phrase(phrase)
             else
               phrase
             end
@@ -126,6 +126,19 @@ module Sunspot
             negated.add_component(component)
           end
           negated
+        end
+
+        private
+
+        def negate_phrase(phrase)
+          # in case it is a join phrase like this:
+          #  {!join from=photo_container_id_i to=id_i}caption_s:Sydney
+          # the '-' sign need to be put after the closing curly brace
+          if phrase.start_with?("{!join")
+            phrase.gsub(/(\{\!join .+\})(.+)/, '\1-\2')
+          else
+            "-#{phrase}"
+          end
         end
       end
 
