@@ -90,6 +90,10 @@ module Sunspot
           0
         end
 
+        def query_time
+          0
+        end
+
         def facets
           []
         end

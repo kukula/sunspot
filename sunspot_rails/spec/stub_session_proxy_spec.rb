@@ -129,6 +129,10 @@ describe 'specs with Sunspot stubbed' do
       @search.total.should == 0
     end
 
+    it 'should return zero query_time' do
+      @search.query_time.should == 0
+    end
+
     it 'should return empty results for a given facet' do
       @search.facet(:category_id).rows.should == []
     end
