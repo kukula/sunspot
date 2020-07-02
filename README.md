@@ -1,3 +1,9 @@
+> ### Deprecated
+>
+> This fork historically hosted some patches that were not available in Sunspot in 2012. Consider using upstream [Sunspot](https://github.com/sunspot/sunspot) instead, which should include many of the changes applied to this fork.
+
+---
+
 # Sunspot
 
 [![Gem Version](https://badge.fury.io/rb/sunspot.png)](http://badge.fury.io/rb/sunspot)
